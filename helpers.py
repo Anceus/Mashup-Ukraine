@@ -16,11 +16,11 @@ def lookup(geo):
     escaped = urllib.parse.quote(geo, safe="")
 
     # Get feed from Google
-    feed = feedparser.parse(f"https://news.google.com/news/rss/local/section/geo/{escaped}")
+    feed = feedparser.parse(f"https://news.google.com/news/section?output=rss&geo={escaped}")
 
     # If no items in feed, get feed from Onion
     if not feed["items"]:
-        feed = feedparser.parse("http://www.theonion.com/feeds/rss")
+        feed = feedparser.parse("https://rss.unian.net/site/news_eng.rss")
 
     # Cache results
     lookup.cache[geo] = [{"link": item["link"], "title": item["title"]} for item in feed["items"]]

@@ -48,7 +48,7 @@ def search():
 
     query = request.args.get("q") + "%"
     places = db.execute("SELECT * FROM places WHERE postal_code \
-                                LIKE :q OR place_name LIKE :q OR admin_name1 LIKE :q", q=query)
+                                LIKE :q OR place_name LIKE :q", q=query)
 
     return jsonify(places)
 
@@ -81,7 +81,7 @@ def update():
         # Doesn't cross the antimeridian
         rows = db.execute("""SELECT * FROM places
                           WHERE :sw_lat <= latitude AND latitude <= :ne_lat AND (:sw_lng <= longitude AND longitude <= :ne_lng)
-                          GROUP BY country_code, place_name, admin_code1
+                          GROUP BY country_code, place_name
                           ORDER BY RANDOM()
                           LIMIT 10""",
                           sw_lat=sw_lat, ne_lat=ne_lat, sw_lng=sw_lng, ne_lng=ne_lng)
@@ -91,7 +91,7 @@ def update():
         # Crosses the antimeridian
         rows = db.execute("""SELECT * FROM places
                           WHERE :sw_lat <= latitude AND latitude <= :ne_lat AND (:sw_lng <= longitude OR longitude <= :ne_lng)
-                          GROUP BY country_code, place_name, admin_code1
+                          GROUP BY country_code, place_name
                           ORDER BY RANDOM()
                           LIMIT 10""",
                           sw_lat=sw_lat, ne_lat=ne_lat, sw_lng=sw_lng, ne_lng=ne_lng)

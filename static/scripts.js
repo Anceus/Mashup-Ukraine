@@ -290,7 +290,7 @@ $(document).ready(function() {
     // Options for map
     // https://developers.google.com/maps/documentation/javascript/reference#MapOptions
     let options = {
-        center: {lat: 37.4236, lng: -122.1619}, // Stanford, California
+        center: {lat: 50.45466, lng: 30.5238}, // Kiev, Ukraine
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         maxZoom: 14,
@@ -327,13 +327,13 @@ function addMarker(place)
     var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-    title: place["place_name"] +", "+ place["admin_name1"],
-    label: {text: place["place_name"] +", "+ place["admin_name1"], color: "#b0d5ce"},
+    title: place["place_name"] +", "+ place["postal_code"],
+    label: {text: place["place_name"] +", "+ place["postal_code"], color: "#b0d5ce"},
     icon : image,
     });
 
     // Read JSON ansver from /articles
-    $.getJSON("/articles", {geo: place["postal_code"]}, function(articles) {
+    $.getJSON("/articles", {geo: place["place_name"]}, function(articles) {
         // If data is not empty
         if (!$.isEmptyObject(articles)) {
             var articlesContent = "<ul>";
