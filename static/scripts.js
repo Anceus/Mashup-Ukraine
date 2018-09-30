@@ -423,7 +423,6 @@ function configure()
     $("#q").focus();
 }
 
-
 // Remove markers from map
 function removeMarkers()
 {

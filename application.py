@@ -38,7 +38,7 @@ def articles():
     items = lookup(request.args.get("geo"))
     return jsonify(items[:5])
 
-
+# Search for places that match query 
 @app.route("/search")
 def search():
     """Search for places that match query"""

@@ -18,7 +18,7 @@ def lookup(geo):
     # Get feed from Google
     feed = feedparser.parse(f"https://news.google.com/news/section?output=rss&geo={escaped}")
 
-    # If no items in feed, get feed from Onion
+    # If no items in feed, get feed from Unian
     if not feed["items"]:
         feed = feedparser.parse("https://rss.unian.net/site/news_eng.rss")
 
